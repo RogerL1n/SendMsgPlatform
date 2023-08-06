@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: platform-webmaster
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: platform-config
+      profile: dev
+  datasource:
+    url: jdbc:mysql:///sms_platform?useSSL=false&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password:
+    driver-class-name: org.gjt.mm.mysql.Driver
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10000/eureka/

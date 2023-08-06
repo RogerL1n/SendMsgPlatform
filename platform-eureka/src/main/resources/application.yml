@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: platform-eureka
+server:
+  port: 10000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+    fetch-registry: false
+    register-with-eureka: false #使用的单机的
+    region: 华北  #区域是华北,客户度注册的时候也要加上这个region

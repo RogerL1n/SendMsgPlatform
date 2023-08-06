@@ -1,0 +1,16 @@
+#spring:
+#  profiles:
+#    active: @profileActive@
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.qianfeng.platform.webmaster.pojo
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 6000
+        read-timeout: 6000
+  hystrix:
+    enabled: true
+server:
+  port: 8083

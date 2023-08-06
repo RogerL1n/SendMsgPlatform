@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: platform-config
+  cloud:
+    inetutils:
+      ignored-interfaces: ['Vmware.*']  #忽略以Vmware开头的网卡,防止注册服务的时候ip错误导致无法访问
+    config:
+      server:
+        git:
+          uri: ## #设置配置中心从git的哪个仓库中查找配置文件
+server:
+  port: 30000
+eureka:
+  client:
+    region: 华北
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+  instance:
+    prefer-ip-address: true #这个管理的默认是访问的方式是ip,否则会使用机器名,注意 他不是管理的在eureka中显示的地址

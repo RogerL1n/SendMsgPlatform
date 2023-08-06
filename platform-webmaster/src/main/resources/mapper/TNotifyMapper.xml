@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lry.platform.webmaster.dao.TNotifyMapper">
+  <resultMap id="BaseResultMap" type="com.lry.platform.webmaster.pojo.TNotify">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="desp" jdbcType="VARCHAR" property="desp" />
+    <result column="notify_state" jdbcType="SMALLINT" property="notifyState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, tag, desp, notify_state
+  </sql>
+  <select id="selectByExample" parameterType="com.lry.platform.webmaster.pojo.TNotifyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_notify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_notify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_notify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lry.platform.webmaster.pojo.TNotifyExample">
+    delete from t_notify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lry.platform.webmaster.pojo.TNotify">
+    insert into t_notify (id, tag, desp,
+      notify_state)
+    values (#{id,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, #{desp,jdbcType=VARCHAR},
+      #{notifyState,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lry.platform.webmaster.pojo.TNotify">
+    insert into t_notify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="desp != null">
+        desp,
+      </if>
+      <if test="notifyState != null">
+        notify_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="desp != null">
+        #{desp,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyState != null">
+        #{notifyState,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lry.platform.webmaster.pojo.TNotifyExample" resultType="java.lang.Long">
+    select count(*) from t_notify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_notify
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.desp != null">
+        desp = #{record.desp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notifyState != null">
+        notify_state = #{record.notifyState,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_notify
+    set id = #{record.id,jdbcType=INTEGER},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      desp = #{record.desp,jdbcType=VARCHAR},
+      notify_state = #{record.notifyState,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lry.platform.webmaster.pojo.TNotify">
+    update t_notify
+    <set>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="desp != null">
+        desp = #{desp,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyState != null">
+        notify_state = #{notifyState,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lry.platform.webmaster.pojo.TNotify">
+    update t_notify
+    set tag = #{tag,jdbcType=VARCHAR},
+      desp = #{desp,jdbcType=VARCHAR},
+      notify_state = #{notifyState,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

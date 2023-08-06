@@ -1,0 +1,19 @@
+#在当亲文件中进行配置文件的初始化,在线读取配置,因为我们的程序在启动起来进行对象初始化的时候就必须有配置了
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+    region: 华北
+spring:
+  application:
+    name: platform-cache
+  cloud:
+    config:
+      discovery:
+        enabled: true #开启注册中心的服务发现,也就是从注册中心获取配置中心服务器的相关信息
+        service-id: platform-config  #设置配置中心在注册中心中的名字,这个就可以通过名字找到配置中心的地址,然后去请求文件,注意这里不是当前服务的名字
+      profile: dev #实际查找的文件叫 platform-cache-dev.yml  就是当前服务的名字加上这个值
+#  redis:
+#    host:
+#    port:
+#    password: redis001

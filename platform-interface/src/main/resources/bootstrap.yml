@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: platform-interface  #应用的名字
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: platform-config
+      profile: dev
+#  rabbitmq:
+#    host: dss
+#    port: 5672
+#    virtual-host: /test
+eureka:
+  client:
+    region: 华北
+    service-url:
+      defaultZone: http://localhost:10000/eureka

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lry.platform.webmaster.dao.TAcountRecordMapper">
+  <resultMap id="BaseResultMap" type="com.lry.platform.webmaster.pojo.TAcountRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="orderid" jdbcType="VARCHAR" property="orderid" />
+    <result column="clientId" jdbcType="BIGINT" property="clientid" />
+    <result column="paidValue" jdbcType="INTEGER" property="paidvalue" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="paytime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="paymentId" jdbcType="INTEGER" property="paymentid" />
+    <result column="paymentOrder" jdbcType="VARCHAR" property="paymentorder" />
+    <result column="paymentInfo" jdbcType="VARCHAR" property="paymentinfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, orderid, clientId, paidValue, createTime, paytime, paymentId, paymentOrder, paymentInfo
+  </sql>
+  <select id="selectByExample" parameterType="com.lry.platform.webmaster.pojo.TAcountRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_acount_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_acount_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_acount_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lry.platform.webmaster.pojo.TAcountRecordExample">
+    delete from t_acount_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lry.platform.webmaster.pojo.TAcountRecord">
+    insert into t_acount_record (id, orderid, clientId,
+      paidValue, createTime, paytime,
+      paymentId, paymentOrder, paymentInfo
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderid,jdbcType=VARCHAR}, #{clientid,jdbcType=BIGINT},
+      #{paidvalue,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{paytime,jdbcType=TIMESTAMP},
+      #{paymentid,jdbcType=INTEGER}, #{paymentorder,jdbcType=VARCHAR}, #{paymentinfo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lry.platform.webmaster.pojo.TAcountRecord">
+    insert into t_acount_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderid != null">
+        orderid,
+      </if>
+      <if test="clientid != null">
+        clientId,
+      </if>
+      <if test="paidvalue != null">
+        paidValue,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="paytime != null">
+        paytime,
+      </if>
+      <if test="paymentid != null">
+        paymentId,
+      </if>
+      <if test="paymentorder != null">
+        paymentOrder,
+      </if>
+      <if test="paymentinfo != null">
+        paymentInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=BIGINT},
+      </if>
+      <if test="paidvalue != null">
+        #{paidvalue,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paytime != null">
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentid != null">
+        #{paymentid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentorder != null">
+        #{paymentorder,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentinfo != null">
+        #{paymentinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lry.platform.webmaster.pojo.TAcountRecordExample" resultType="java.lang.Long">
+    select count(*) from t_acount_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_acount_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderid != null">
+        orderid = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientid != null">
+        clientId = #{record.clientid,jdbcType=BIGINT},
+      </if>
+      <if test="record.paidvalue != null">
+        paidValue = #{record.paidvalue,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paytime != null">
+        paytime = #{record.paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paymentid != null">
+        paymentId = #{record.paymentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentorder != null">
+        paymentOrder = #{record.paymentorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentinfo != null">
+        paymentInfo = #{record.paymentinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_acount_record
+    set id = #{record.id,jdbcType=BIGINT},
+      orderid = #{record.orderid,jdbcType=VARCHAR},
+      clientId = #{record.clientid,jdbcType=BIGINT},
+      paidValue = #{record.paidvalue,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      paytime = #{record.paytime,jdbcType=TIMESTAMP},
+      paymentId = #{record.paymentid,jdbcType=INTEGER},
+      paymentOrder = #{record.paymentorder,jdbcType=VARCHAR},
+      paymentInfo = #{record.paymentinfo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lry.platform.webmaster.pojo.TAcountRecord">
+    update t_acount_record
+    <set>
+      <if test="orderid != null">
+        orderid = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null">
+        clientId = #{clientid,jdbcType=BIGINT},
+      </if>
+      <if test="paidvalue != null">
+        paidValue = #{paidvalue,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paytime != null">
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentid != null">
+        paymentId = #{paymentid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentorder != null">
+        paymentOrder = #{paymentorder,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentinfo != null">
+        paymentInfo = #{paymentinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lry.platform.webmaster.pojo.TAcountRecord">
+    update t_acount_record
+    set orderid = #{orderid,jdbcType=VARCHAR},
+      clientId = #{clientid,jdbcType=BIGINT},
+      paidValue = #{paidvalue,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      paytime = #{paytime,jdbcType=TIMESTAMP},
+      paymentId = #{paymentid,jdbcType=INTEGER},
+      paymentOrder = #{paymentorder,jdbcType=VARCHAR},
+      paymentInfo = #{paymentinfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <update id="updateByorderid" parameterType="com.lry.platform.webmaster.pojo.TAcountRecord">
+    update t_acount_record
+    <set>
+      <if test="paytime != null">
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentid != null">
+        paymentId = #{paymentid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentorder != null">
+        paymentOrder = #{paymentorder,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentinfo != null">
+        paymentInfo = #{paymentinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderid = #{orderid,jdbcType=VARCHAR}
+  </update>
+</mapper>

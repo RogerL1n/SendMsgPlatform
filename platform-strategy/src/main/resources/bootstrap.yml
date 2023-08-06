@@ -1,0 +1,14 @@
+spring:
+  application:
+    name:  platform-strategy #应用的名字
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: platform-config
+      profile: dev
+eureka:
+  client:
+    region: 华北
+    service-url:
+      defaultZone: http://localhost:10000/eureka
